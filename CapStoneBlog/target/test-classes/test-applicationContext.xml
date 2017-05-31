@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+              xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
+
+    <!-- Bean definitions go here -->
+    <tx:annotation-driven/>
+
+    <context:component-scan base-package="com.sg.capstoneblog.dao" />
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+<!--        <property name="url"
+                  value="jdbc:mysql://swgblogdata.cm10ekcbajls.us-east-2.rds.amazonaws.com:3306/BlogData"/>
+        <property name="username" value="softwareGuild"/>
+        <property name="password" value="softwareGuild"/>-->
+                <property name="url"
+        value="jdbc:mysql://localhost:3306/BlogData_Test"/>
+        <property name="username" value="root"/>
+        <property name="password" value="mynameislong942625"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxTotal" value="10"/>
+    </bean>
+
+    <bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="categoryDao" class="com.sg.capstoneblog.dao.CategoryDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="commentDao" class="com.sg.capstoneblog.dao.CommentDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="contactInfoDao" class="com.sg.capstoneblog.dao.ContactInfoDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="hashtagDao" class="com.sg.capstoneblog.dao.HashtagDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="linkDao" class="com.sg.capstoneblog.dao.LinkDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="pictureDao" class="com.sg.capstoneblog.dao.PictureDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="siteDataDao" class="com.sg.capstoneblog.dao.SiteDataDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="userDao" class="com.sg.capstoneblog.dao.UserDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="tagBlogBridge" class="com.sg.capstoneblog.dao.HashTagBlogDaoJdbcTemplateImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <bean id="linkService" class="com.sg.capstoneblog.service.LinkService">
+        <constructor-arg ref = "linkDao"/>
+    </bean>
+        
+    
+    
+    <bean id="homeService" class="com.sg.capstoneblog.service.HomePageServiceLayer">
+        <constructor-arg ref = "linkDao"/>
+        <constructor-arg ref = "contactInfoDao"/>
+        <constructor-arg ref = "hashtagDao"/>
+        <constructor-arg ref = "siteDataDao"/>
+        <constructor-arg ref = "pictureDao"/>
+        <constructor-arg ref = "userDao"/>
+        <constructor-arg ref = "categoryDao"/>
+    </bean>
+    
+    <bean id="mainBlogService" class="com.sg.capstoneblog.service.MainBlogSiteServiceLayer">
+        <constructor-arg ref = "linkDao"/>
+        <constructor-arg ref = "contactInfoDao"/>
+        <constructor-arg ref = "hashtagDao"/>
+        <constructor-arg ref = "siteDataDao"/>
+        <constructor-arg ref = "pictureDao"/>
+        <constructor-arg ref = "userDao"/>
+        <constructor-arg ref = "categoryDao"/>
+    </bean>
+    
+
+    <bean id="staticSitesService" class="com.sg.capstoneblog.service.StaticSitesServiceLayer">
+        <constructor-arg ref = "linkDao"/>
+        <constructor-arg ref = "contactInfoDao"/>
+        <constructor-arg ref = "siteDataDao"/>
+        <constructor-arg ref = "pictureDao"/>
+    </bean>
+
+    <bean id="blogSiteService" class="com.sg.capstoneblog.service.BlogSiteServiceLayer">
+        <constructor-arg ref = "linkDao"/>
+        <constructor-arg ref = "contactInfoDao"/>
+        <constructor-arg ref = "hashtagDao"/>
+        <constructor-arg ref = "siteDataDao"/>
+        <constructor-arg ref = "pictureDao"/>
+        <constructor-arg ref = "userDao"/>
+        <constructor-arg ref = "categoryDao"/>
+        <constructor-arg ref = "commentDao"/>
+        <constructor-arg ref= "tagBlogBridge"/>
+
+    </bean>
+    
+    
+    <bean id="adminService" class="com.sg.capstoneblog.service.AdminServiceLayer">
+        <constructor-arg ref = "linkDao"/>
+        <constructor-arg ref = "contactInfoDao"/>
+        <constructor-arg ref = "hashtagDao"/>
+        <constructor-arg ref = "siteDataDao"/>
+        <constructor-arg ref = "pictureDao"/>
+        <constructor-arg ref = "userDao"/>
+        <constructor-arg ref = "categoryDao"/>
+        <constructor-arg ref = "pictureDao"/>
+        <constructor-arg ref = "tagBlogBridge"/>
+    </bean>
+<!--    <bean id="templateController" class="com.sg.capstoneblog.controller.TemplateController">
+        <constructor-arg ref="homeService"/>
+    </bean>-->
+    
+</beans>
