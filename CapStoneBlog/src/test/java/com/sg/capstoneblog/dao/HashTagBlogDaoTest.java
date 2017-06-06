@@ -77,10 +77,10 @@ public class HashTagBlogDaoTest {
 
     @Test
     public void testGetSiteIdByTag() {
-        int size = dao.findSitesForHashTag("#blessed").size();
+        int size = dao.findSitesForHashTag("#dog").size();
         assertEquals(1, size);
 
-        size = dao.findSitesForHashTag("#99poblems").size();
+        size = dao.findSitesForHashTag("#frog").size();
         assertEquals(2, size);
     }
 

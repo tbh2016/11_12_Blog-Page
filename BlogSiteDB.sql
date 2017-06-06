@@ -31,11 +31,11 @@ CREATE TABLE HashTags (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 INSERT INTO HashTags VALUES 
-(1, "#blessed"),
-(2, "#99poblems"),
-(3, "#bof"),
-(4, "#Guild4Eva"),
-(5, "#projectsuck");
+(1, "#baseball"),
+(2, "#bat"),
+(3, "#cheers"),
+(4, "#homerun"),
+(5, "#fastball");
 
 CREATE TABLE Users (
 	userId INT NOT NULL AUTO_INCREMENT,
@@ -50,10 +50,10 @@ CREATE TABLE Users (
 
 INSERT INTO Users VALUES 
 (1, "admin", "admin", "admin", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq"),
-(2, "Tbone", "Thuan", "F T W", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq"),
-(3, "AdventrueTime", "Cory", "McMillen", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq"),
+(2, "Tbone", "Thuan", "Huynh", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq"),
+(3, "AdventureTime", "Cory", "McMillen", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq"),
 (4, "TokyoJ", "Jayce", "Crowther", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq"),
-(5, "ThatKidYouHate88", "Rob", "Kacic", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq");
+(5, "AshKetchum", "Rob", "Kacic", true, "$2a$10$DCIk1ZeP5/DU1Za5InnnpO3vp6OHAXQIjT1Ydlt7eDMn0B8X8LDRq");
 
 CREATE TABLE Authorities (
  userName varchar(20) NOT NULL,
@@ -68,15 +68,15 @@ INSERT INTO Authorities (`username`, `authority`) VALUES
 ('Tbone', 'ROLE_ADMIN'),
 ('Tbone', 'ROLE_MANAGER'),
 ('Tbone', 'ROLE_USER'),
-('AdventrueTime', 'ROLE_ADMIN'),
-('AdventrueTime', 'ROLE_MANAGER'),
-('AdventrueTime', 'ROLE_USER'),
+('AdventureTime', 'ROLE_ADMIN'),
+('AdventureTime', 'ROLE_MANAGER'),
+('AdventureTime', 'ROLE_USER'),
 ('TokyoJ', 'ROLE_ADMIN'),
 ('TokyoJ', 'ROLE_MANAGER'),
 ('TokyoJ', 'ROLE_USER'),
-('ThatKidYouHate88', 'ROLE_ADMIN'),
-('ThatKidYouHate88', 'ROLE_MANAGER'),
-('ThatKidYouHate88', 'ROLE_USER');
+('AshKetchum', 'ROLE_ADMIN'),
+('AshKetchum', 'ROLE_MANAGER'),
+('AshKetchum', 'ROLE_USER');
 
 CREATE TABLE Category (
 	categoryId INT NOT NULL AUTO_INCREMENT,
@@ -90,7 +90,7 @@ INSERT INTO Category VALUES
 (2, "Entertainment", "Music, Movies, Media and More !"),
 (3, "Cats", "Cats, Cats, Cats"),
 (4, "Bird", "It's the word"),
-(5, "Vaporizer", "The wonderful world of vaping");
+(5, "Dogs", "A man's best friend");
 
 CREATE TABLE PageType (
 	pageTypeId INT NOT NULL AUTO_INCREMENT,
@@ -125,11 +125,11 @@ CREATE TABLE SiteData (
 INSERT INTO SiteData VALUES 
 (1, "Home", "Welcome to the home page", "2017/05/31", null, null, 1, 1, null),
 (2, "All My blogs", "Dive into this blog life with me", "2017/05/31", null, null, 3, 2, null),
-(3, "About Us", "Im so sorry Thuan I used the same text here", "2017/06/01", null, null, 2, 3, null),
+(3, "About Us", "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum", "2017/06/01", null, null, 2, 3, null),
 --  ADDED IN
 (7, "Contact Us", "Here is some information about us", "2017/06/01", null, null, 2, 3, null),
-(4, "New Vape", "Picked up a new vape, dig the pics, shit's legit", "2017/06/03", null, null, 4, 4, 5),
-(5, "Kitties !!!!!", "Out walking I saw all these kitties !!!", "2017/06/05", null, null, 4, 5, 3),
+(4, "Dogs", "A man's best friend. What kind of dogs I like.", "2017/06/03", null, null, 4, 4, 5),
+(5, "Kitties!!!!!", "Out walking I saw all these kitties!!!", "2017/06/05", null, null, 4, 5, 3),
 (6, "Admin Page", "Set Up Your Site", null, null, null, 5,1,1);
 
 
@@ -151,10 +151,9 @@ INSERT INTO Links VALUES
 (3, "About", "/Page/displayStaticPage", true, 3, 2),
 (7, "Contact Us", "/Page/displayStaticPage", true, 7, 3),
 -- TWO BELOW NEEED WORK 
-(4, "Vape Life", "/blogs/newvape", false, 4, null),
+(4, "Dogs", "/blogs/dogs", false, 4, null),
 (5, "Kitties", "/blogs/kitties", false, 5, null),
 (6, "Admin Page", "/admin", false, 6, 5);
-
 
 
 
@@ -170,11 +169,11 @@ CREATE TABLE Comments(
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 INSERT INTO Comments VALUES 
-(1, 4, "admin", "Cool Vape", "Sweet Ass Vape Broseph", "2017/06/10 "),
-(2, 4, "admin", "F***boy", "Vaping is stupid and you're stupid", "2017/06/09"),
-(3, 4, "admin", "Healthy ?", "I;ve heard it's supposed to be healty ? Is that true", "2017/06/014"),
-(4, 5, "admin", "O M G", "Those are SOOOOOO cute", "2017/06/06"),
-(5, 5, "admin", "<3<3<3", "I want the grey one ! Where did you see those little scoundrels", "2017/07/09");
+(1, 4, "admin", "Cool Dog", "Sweet Dog Mister.", "2017/06/10 "),
+(2, 4, "admin", "Nice Cat", "Can I pet your cat sir?", "2017/06/09"),
+(3, 4, "admin", "Healthy?", "I've heard it's supposed to be healthy? Is that true?", "2017/06/014"),
+(4, 5, "admin", "O M G", "Those are SOOOOOO cute.", "2017/06/06"),
+(5, 5, "admin", "<3<3<3", "I want the grey one! Where did you see those little ones?", "2017/07/09");
 
 
 CREATE TABLE SitePictureBridge (

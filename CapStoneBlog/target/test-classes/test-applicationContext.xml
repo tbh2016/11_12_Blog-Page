@@ -28,7 +28,7 @@
                 <property name="url"
         value="jdbc:mysql://localhost:3306/BlogData_Test"/>
         <property name="username" value="root"/>
-        <property name="password" value="mynameislong942625"/>
+        <property name="password" value="root"/>
         <property name="initialSize" value="5"/>
         <property name="maxTotal" value="10"/>
     </bean>

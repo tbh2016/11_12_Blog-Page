@@ -55,9 +55,9 @@ public class BlogSiteServiceLayerTest {
 
         assertNotNull(blogSite);
 
-        assertTrue("Kitties !!!!!".equals(blogSite.getSiteData().getTitle()));
+        assertTrue("Kitties!!!!!".equals(blogSite.getSiteData().getTitle()));
 
-        assertTrue("Out walking I saw all these kitties !!!".equals(blogSite.getSiteData().getContent()));
+        assertTrue("Out walking I saw all these kitties!!!".equals(blogSite.getSiteData().getContent()));
 
         assertEquals(4, blogSite.getHashTags().size());
 
@@ -69,10 +69,10 @@ public class BlogSiteServiceLayerTest {
 
     @Test
     public void testGetSitesByTag() {
-        int size = service.getAllBlogsForTag("#blessed").size();
+        int size = service.getAllBlogsForTag("#dog").size();
         assertEquals(1, size);
 
-        size = service.getAllBlogsForTag("#99poblems").size();
+        size = service.getAllBlogsForTag("#frog").size();
         assertEquals(2, size);
 
     }
